@@ -7,14 +7,13 @@
 package controller;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.rmi.ServerException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.CustomTable;
-import model.Customer;
+import model.CustomerDB;
 
 /**
  *
@@ -35,21 +34,22 @@ public class FrontController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getServletPath();
-        if ("/add.do".equals(path)) {
-            String name = request.getParameter("name");
-            Customer c = new Customer(name);
-                        CustomTable ct = (CustomTable) getServletContext().getAttribute("CustomTable");
-            if (ct == null) {
-                ct = new CustomTable();
-                getServletContext().setAttribute("CustomTable", ct);
+                    CustomerDB customerDB = (CustomerDB) getServletContext().getAttribute("CustomerDB");
+            if (customerDB == null) {
+                customerDB = new CustomerDB();
+                getServletContext().setAttribute("CustomerDB", customerDB);
             }
-            ct.getCustomers().add(c);
-            RequestDispatcher rd = request.getRequestDispatcher("Home");
-            rd.forward(request, response);
+        if ("/add.do".equals(path)) {
+            customerDB.add(request.getParameter("name"));
+            getServletContext().getRequestDispatcher("/Home").forward(request, response);
+        } else
+        if ("/delete.do".equals(path)) {
+            customerDB.delete(request.getParameter("id"));
+            getServletContext().getRequestDispatcher("/Home").forward(request, response);
             
-        } 
-        throw new ServletException(path);
-                
+        }
+        throw new ServerException(path);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

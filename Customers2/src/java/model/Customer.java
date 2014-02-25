@@ -13,8 +13,12 @@ import java.util.UUID;
  * @author danecek
  */
 public class Customer {
+    
     private String id;
     private String name;
+
+    public Customer() {
+    }
 
     public Customer(String name) {
         this(UUID.randomUUID().toString(), name);
@@ -23,9 +27,6 @@ public class Customer {
     public Customer(String id, String name) {
         this.id = id;
         this.name = name;
-    }
-
-    public Customer() {
     }
 
     /**

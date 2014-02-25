@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package svrl;
+package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.CustomTable;
+import model.Customer;
+import model.CustomerDB;
 
 /**
  *
@@ -39,21 +39,25 @@ public class Delete extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Delete</title>");            
+            out.println("<title>Servlet Delete</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Delete Customer</h1>");
-           String custId = request.getParameter("id");
-           
-                       CustomTable ct = (CustomTable) getServletContext().getAttribute("CustomTable");
-            if (ct == null) {
-                ct = new CustomTable();
-                getServletContext().setAttribute("CustomTable", ct);
+            CustomerDB customerDB = (CustomerDB) getServletContext().getAttribute("CustomerDB");
+            if (customerDB == null) {
+                customerDB = new CustomerDB();
+                getServletContext().setAttribute("CustomerDB", customerDB);
             }
-            ct.
-           
-            out.println("<body>");
-            
+            String id = request.getParameter("id");
+            Customer cust = customerDB.get(id);
+            out.println(cust.toString());
+            out.println("<form action=\"delete.do\" method=\"post\">");
+            out.println("<input type=\"hidden\" name= \"id\" value=\"" + cust.getId() + "\" />");
+
+            out.println("<input type=\"submit\" value=\"Delete Customer\" />");
+            out.println("</form>");
+
+            out.println("</body>");
             out.println("</body>");
             out.println("</html>");
         }

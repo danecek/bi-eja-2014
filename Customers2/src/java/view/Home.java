@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package svrl;
+package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,8 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.CustomTable;
 import model.Customer;
+import model.CustomerDB;
 
 /**
  *
@@ -34,8 +34,7 @@ public class Home extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -44,34 +43,31 @@ public class Home extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Customers</h1>");
-            out.println("<table border=\"1\">");
-            CustomTable ct = (CustomTable) getServletContext().getAttribute("CustomTable");
-            if (ct == null) {
-                ct = new CustomTable();
-                getServletContext().setAttribute("CustomTable", ct);
+            CustomerDB customerDB = (CustomerDB) getServletContext().getAttribute("CustomerDB");
+            if (customerDB == null) {
+                customerDB = new CustomerDB();
+                getServletContext().setAttribute("CustomerDB", customerDB);
             }
-            for (Customer c : ct.getCustomers()) {
+            out.print("<table border=\"1\">");
+            for (Customer c : customerDB.getCustomers()) {
                 out.println("<tr>");
                 out.println("<td>");
                 out.println(c.getId());
+
                 out.println("</td>");
                 out.println("<td>");
                 out.println(c.getName());
                 out.println("</td>");
                 out.println("<td>");
-                out.println("<a href=\"Delete?name=" + c.getId() +"\">Delete</a>");
+                out.println("<a href=\"Delete?id="+ c.getId() +"\" >Delete</a>");
                 out.println("</td>");
                 out.println("</tr>");
 
             }
-            out.println("</table>");
-            out.println("<a href=\"Add\">Add Customer</a>");
-            
-
+            out.print("</table>");
+            out.print("<a href=\"Add\" >Add Customer</a>");
             out.println("</body>");
             out.println("</html>");
-        } finally {
-            out.close();
         }
     }
 

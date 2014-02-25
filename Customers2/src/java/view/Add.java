@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package svrl;
+
+package view;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,15 +38,15 @@ public class Add extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Add</title>");
+            out.println("<title>Servlet Add</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Add Customer</h1>");
-            out.println("<form action=\"add.do\"/>");
-            out.println("<input type=\"text\" name=\"name\"/>");
-            out.println("<input type=\"submit\" value=\"Add\"/>");
-            out.println("</form>");
+            out.println("<form action=\"add.do\" method=\"post\">");
+            out.println("<input type=\"text\" name=\"name\" />");
+            out.println("<input type=\"submit\" value=\"Add Customer\" />");
 
+            out.println("</form>");
             out.println("</body>");
             out.println("</html>");
         }

@@ -14,11 +14,11 @@ import java.util.Map;
  *
  * @author danecek
  */
-public class CustomTable {
+public class CustomerDB {
 
-    public CustomTable() {
-        addCustomer("Kos");
-        addCustomer("Cap");
+    public CustomerDB() {
+        add("Kos");
+        add("Cap");
     }
 
     private Map<String, Customer> customers = new HashMap<>();
@@ -27,18 +27,20 @@ public class CustomTable {
      * @return the customers
      */
     public List<Customer> getCustomers() {
-        return new ArrayList(customers.values());
+        return new ArrayList<>(customers.values());
     }
 
-    
-    public Customer getCustomer(String id) {
-        return customers.get(id);
-    }
-    
-    public void addCustomer(String name) {
+    public void add(String name) {
         Customer c = new Customer(name);
         customers.put(c.getId(), c);
     }
+    
+    public Customer get(String id) {
+        return customers.get(id);
+    }
 
+    public void delete(String parameter) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
