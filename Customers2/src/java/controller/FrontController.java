@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package controller;
 
 import java.io.IOException;
 import java.rmi.ServerException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.CustomerDB;
+import model.CustomerException;
 
 /**
  *
@@ -34,21 +36,27 @@ public class FrontController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getServletPath();
-                    CustomerDB customerDB = (CustomerDB) getServletContext().getAttribute("CustomerDB");
-            if (customerDB == null) {
-                customerDB = new CustomerDB();
-                getServletContext().setAttribute("CustomerDB", customerDB);
-            }
-        if ("/add.do".equals(path)) {
-            customerDB.add(request.getParameter("name"));
-            getServletContext().getRequestDispatcher("/Home").forward(request, response);
-        } else
-        if ("/delete.do".equals(path)) {
-            customerDB.delete(request.getParameter("id"));
-            getServletContext().getRequestDispatcher("/Home").forward(request, response);
-            
+        CustomerDB customerDB = (CustomerDB) getServletContext().getAttribute("CustomerDB");
+        if (customerDB == null) {
+            customerDB = new CustomerDB();
+            getServletContext().setAttribute("CustomerDB", customerDB);
         }
-        throw new ServerException(path);
+        if ("/add.do".equals(path)) {
+            try {
+                customerDB.add(request.getParameter("name"));
+//            getServletContext().getRequestDispatcher("/Home").forward(request, response);
+                response.sendRedirect(getServletContext().getContextPath() + "/Home");
+            } catch (CustomerException ex) {
+                request.setAttribute("error", ex);
+                getServletContext().getRequestDispatcher("/Add").forward(request, response);
+            }
+        } else if ("/delete.do".equals(path)) {
+            customerDB.delete(request.getParameter("id"));
+            response.sendRedirect(getServletContext().getContextPath() + "/Home");
+//            getServletContext().getRequestDispatcher("/Home").forward(request, response);
+
+        }
+        //   throw new ServerException(path);
 
     }
 

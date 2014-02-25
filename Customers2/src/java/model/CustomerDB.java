@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,8 +19,12 @@ import java.util.Map;
 public class CustomerDB {
 
     public CustomerDB() {
-        add("Kos");
-        add("Cap");
+        try {
+            add("Kos");
+            add("Cap");
+        } catch (CustomerException ex) {
+            Logger.getLogger(CustomerDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private Map<String, Customer> customers = new HashMap<>();
@@ -30,17 +36,20 @@ public class CustomerDB {
         return new ArrayList<>(customers.values());
     }
 
-    public void add(String name) {
+    public void add(String name) throws CustomerException {
+        if (name == null || name.isEmpty()) {
+            throw new CustomerException("empty name");
+        }
         Customer c = new Customer(name);
         customers.put(c.getId(), c);
     }
-    
+
     public Customer get(String id) {
         return customers.get(id);
     }
 
-    public void delete(String parameter) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(String id) {
+        customers.remove(id);
     }
 
 }

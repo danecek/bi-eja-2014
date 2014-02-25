@@ -42,6 +42,9 @@ public class Add extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Add Customer</h1>");
+            Exception error = (Exception) request.getAttribute("error");
+            if (error != null)
+                out.print(error);
             out.println("<form action=\"add.do\" method=\"post\">");
             out.println("<input type=\"text\" name=\"name\" />");
             out.println("<input type=\"submit\" value=\"Add Customer\" />");
