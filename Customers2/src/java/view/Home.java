@@ -59,6 +59,9 @@ public class Home extends HttpServlet {
                 out.println(c.getName());
                 out.println("</td>");
                 out.println("<td>");
+                out.println(c.getAge());
+                out.println("</td>");
+                out.println("<td>");
                 out.println("<a href=\"Delete?id="+ c.getId() +"\" >Delete</a>");
                 out.println("</td>");
                 out.println("</tr>");
