@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.HEAD;
 import model.Customer;
 import model.CustomerDB;
 import model.CustomerValidator;
@@ -65,7 +66,6 @@ public class FrontController extends HttpServlet {
                 throw new ServerException(path);
 
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
