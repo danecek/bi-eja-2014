@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
 
 import java.io.IOException;
@@ -13,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.CustomerDB;
+import model.CustomerValidator;
 
 /**
  *
@@ -22,8 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 public class Add extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -38,12 +40,20 @@ public class Add extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Add</title>");            
+            out.println("<title>Servlet Add</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Add Customer</h1>");
+            CustomerValidator customerValidator = (CustomerValidator) request.getAttribute("customerValidator");
+            if (customerValidator == null) {
+                customerValidator = new CustomerValidator();
+                getServletContext().setAttribute("customerValidator", customerValidator);
+            }
+            out.println("<h3>"+customerValidator.getValidationError()+"</h3>");
+
             out.println("<form action=\"add.do\" method=\"post\">");
-            out.println("<input type=\"text\" name=\"name\" />");
+            out.println("<input type=\"text\" name=\"name\" value=\""+ customerValidator.getName() +"\" />");
+            out.println("<input type=\"text\" name=\"age\" value=\""+ customerValidator.getAge() +"\"/>");
             out.println("<input type=\"submit\" value=\"Add Customer\" />");
 
             out.println("</form>");
@@ -54,7 +64,8 @@ public class Add extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP
+     * <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -68,7 +79,8 @@ public class Add extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP
+     * <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -90,5 +102,4 @@ public class Add extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

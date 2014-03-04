@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package model;
 
 import java.util.UUID;
@@ -13,20 +12,27 @@ import java.util.UUID;
  * @author danecek
  */
 public class Customer {
-    
+
     private String id;
     private String name;
+
+    @Override
+    public String toString() {
+        return "Customer{" + "id=" + id + ", name=" + name + ", age=" + getAge() + '}';
+    }
+    private int age;
 
     public Customer() {
     }
 
-    public Customer(String name) {
-        this(UUID.randomUUID().toString(), name);
+    public Customer(String name, int age) {
+        this(UUID.randomUUID().toString(), name, age);
     }
 
-    public Customer(String id, String name) {
+    public Customer(String id, String name, int age) {
         this.id = id;
         this.name = name;
+        this.age = age;
     }
 
     /**
@@ -56,5 +62,18 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    /**
+     * @return the age
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
 }
