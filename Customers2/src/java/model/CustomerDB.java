@@ -17,8 +17,8 @@ import java.util.Map;
 public class CustomerDB {
 
     public CustomerDB() {
-        add(new Customer("Kos", 23));
-        add(new Customer("Cap", 55));
+        add("Kos");
+        add("Cap");
     }
 
     private Map<String, Customer> customers = new HashMap<>();
@@ -30,7 +30,8 @@ public class CustomerDB {
         return new ArrayList<>(customers.values());
     }
 
-    public void add(Customer c) {
+    public void add(String name) {
+        Customer c = new Customer(name);
         customers.put(c.getId(), c);
     }
     
@@ -38,8 +39,8 @@ public class CustomerDB {
         return customers.get(id);
     }
 
-    public void delete(String id) {
-        customers.remove(id);
+    public void delete(String parameter) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
