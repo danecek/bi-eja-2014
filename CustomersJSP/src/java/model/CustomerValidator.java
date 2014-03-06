@@ -10,9 +10,9 @@ package model;
  */
 public class CustomerValidator {
 
-    private String name ="";
-    private String age ="";
-    private String validationError="";
+    private String name = "";
+    private String age = "";
+    private String validationError = "";
 
     public CustomerValidator() {
     }
@@ -73,7 +73,7 @@ public class CustomerValidator {
         try {
             a = Integer.parseInt(age);
         } catch (NumberFormatException e) {
-            validationError = "Aage invalid";
+            validationError = "Invalid age";
             return null;
         }
         return new Customer(name, a);

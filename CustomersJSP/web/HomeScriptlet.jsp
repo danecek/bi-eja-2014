@@ -16,34 +16,36 @@
     <body>
         <h1>Customers</h1>
         <%
-            CustomerDB customerDB = (CustomerDB) getServletContext().getAttribute("CustomerDB");
+            CustomerDB customerDB = (CustomerDB) getServletContext().getAttribute("customerDB");
             if (customerDB == null) {
                 customerDB = new CustomerDB();
-                getServletContext().setAttribute("CustomerDB", customerDB);
+                getServletContext().setAttribute("customerDB", customerDB);
             }
-            out.print("<table border=\"1\">");
-            for (Customer c : customerDB.getCustomers()) {
         %>
-    <tr>
-        <td>
-            <%= c.getId()%>
+        <table border="1">
+            <%
+                for (Customer c : customerDB.getCustomers()) {
+            %>
+            <tr>
+                <td>
+                    <%= c.getId()%>
 
-        </td>
-        <td>
-            <%= c.getName()%>
-        </td>
-        <td>
-            <%= c.getAge()%>
-        </td>
-        <td>
-            <a href="Delete?id=<%= c.getId()%>" >Delete</a>
-        </td>
-    </tr>
-    <%
+                </td>
+                <td>
+                    <%= c.getName()%>
+                </td>
+                <td>
+                    <%= c.getAge()%>
+                </td>
+                <td>
+                    <a href="Delete?id=<%= c.getId()%>" >Delete</a>
+                </td>
+            </tr>
+            <%
+                }
+            %>
+        </table>
+        <a href="Add" >Add Customer</a>
 
-        }
-        out.print("</table>");
-        out.print("<a href=\"Add\" >Add Customer</a>");
-    %>
-</body>
+    </body>
 </html>

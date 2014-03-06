@@ -30,11 +30,11 @@
                         ${c.age}
                     </td>
                     <td>
-                        <a href="Delete?id=${c.id}" >Delete</a>
+                        <a href="Delete.jsp?id=${c.id}" >Delete</a>
                     </td>
                 </tr>
             </c:forEach>   
         </table>
-        <a href="Add" >Add Customer</a>
+        <a href="Add.jsp" >Add Customer</a>
     </body>
 </html>
