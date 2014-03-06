@@ -6,9 +6,6 @@
 package controller;
 
 import java.io.IOException;
-import java.rmi.ServerException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.CustomerDB;
 import model.CustomerException;
+import model.CustomerValidator;
 
 /**
  *
@@ -42,12 +40,17 @@ public class FrontController extends HttpServlet {
             getServletContext().setAttribute("CustomerDB", customerDB);
         }
         if ("/add.do".equals(path)) {
+            CustomerValidator customerValidator =
+                    new CustomerValidator(request.getParameter("name"), request.getParameter("age"));
+            
+            
             try {
-                customerDB.add(request.getParameter("name"));
+                customerDB.add(customerValidator.validate());
 //            getServletContext().getRequestDispatcher("/Home").forward(request, response);
                 response.sendRedirect(getServletContext().getContextPath() + "/Home");
             } catch (CustomerException ex) {
                 request.setAttribute("error", ex);
+                request.setAttribute("customerValidator", customerValidator);
                 getServletContext().getRequestDispatcher("/Add").forward(request, response);
             }
         } else if ("/delete.do".equals(path)) {

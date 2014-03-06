@@ -19,12 +19,10 @@ import java.util.logging.Logger;
 public class CustomerDB {
 
     public CustomerDB() {
-        try {
-            add("Kos");
-            add("Cap");
-        } catch (CustomerException ex) {
-            Logger.getLogger(CustomerDB.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        add(new Customer("Kos", 12));
+        add(new Customer("Cap", 14));
+
     }
 
     private Map<String, Customer> customers = new HashMap<>();
@@ -36,11 +34,7 @@ public class CustomerDB {
         return new ArrayList<>(customers.values());
     }
 
-    public void add(String name) throws CustomerException {
-        if (name == null || name.isEmpty()) {
-            throw new CustomerException("empty name");
-        }
-        Customer c = new Customer(name);
+    public void add(Customer c) {
         customers.put(c.getId(), c);
     }
 

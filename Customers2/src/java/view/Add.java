@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
 
 import java.io.IOException;
@@ -13,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.CustomerValidator;
 
 /**
  *
@@ -38,15 +38,22 @@ public class Add extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Add</title>");            
+            out.println("<title>Servlet Add</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Add Customer</h1>");
             Exception error = (Exception) request.getAttribute("error");
-            if (error != null)
+            if (error != null) {
                 out.print(error);
+            }
+            CustomerValidator customerValidator = (CustomerValidator) request.getAttribute("customerValidator");
+            if (customerValidator == null) {
+                customerValidator = new CustomerValidator();
+            }
+
             out.println("<form action=\"add.do\" method=\"post\">");
-            out.println("<input type=\"text\" name=\"name\" />");
+            out.println("<input type=\"text\" name=\"name\" value=\"" + customerValidator.getName() + "\"/>");
+            out.println("<input type=\"text\" name=\"age\" value=\"" + customerValidator.getAge() + "\"/>");
             out.println("<input type=\"submit\" value=\"Add Customer\" />");
 
             out.println("</form>");
