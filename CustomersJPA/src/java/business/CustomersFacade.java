@@ -32,10 +32,6 @@ public class CustomersFacade {
         return customerDAO.findAll();
     }
 
-    public CustomerGroup getGroup(Long groupId) {
-        return groupDAO.find(groupId);
-    }
-
     public void deleteCustomer(Long custId) {
         customerDAO.delete(custId);
     }

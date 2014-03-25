@@ -78,4 +78,18 @@ public class Customer {
     public void setId(Long id) {
         this.id = id;
     }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 }

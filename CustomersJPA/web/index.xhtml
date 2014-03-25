@@ -15,8 +15,8 @@
 
 
             <ui:define name="content">
-                <h:dataTable border="1" value="#{customerDB.customers}"
-                             var="cust" rendered="#{not empty customerDB.customers}">
+                <h:dataTable border="1" value="#{indexBean.customers}"
+                             var="cust" rendered="#{not empty indexBean.customers}">
                     <h:column>
                         <f:facet name="header">
                             Id

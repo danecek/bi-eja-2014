@@ -61,7 +61,9 @@ public class AddCustomerBean {
     }
 
     public String store() {
-        CustomerGroup g = customersFacade.findGroup(getGroupId());
+        CustomerGroup g = null;
+        if (groupId != null)
+          g = customersFacade.findGroup(groupId);
         customersFacade.createCustomer(new Customer(name, age, g));
         return "index?faces-redirect=true";
     }

@@ -30,12 +30,13 @@ public class CustomerDAO {
     }
 
     public Collection<Customer> findAll() {
-        TypedQuery<Customer> q = (TypedQuery<Customer>) em.createQuery("SELECT customer FROM Customer custome");
+        TypedQuery<Customer> q = (TypedQuery<Customer>) em.createQuery("SELECT customer FROM Customer customer");
         return q.getResultList();
 
     }
 
     public void delete(Long custId) {
-        em.remove(new Customer(custId));
+        Customer c = find(custId);
+        em.remove(c);
     }
 }
