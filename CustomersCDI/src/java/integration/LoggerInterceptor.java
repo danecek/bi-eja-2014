@@ -1,35 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package integration;
 
 import java.lang.reflect.Method;
-import javax.enterprise.context.Dependent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
-
 import javax.interceptor.InvocationContext;
-import org.jboss.logging.Logger;
 
-/**
- *
- * @author danecek
- */
+@DAOLogger
 @Interceptor
-@Dependent
-@CustomerDAOInterceptorBinding
 public class LoggerInterceptor {
 
     private static final Logger logger = Logger.getLogger(LoggerInterceptor.class.getName());
 
     @AroundInvoke
-    public void log(InvocationContext context) throws Exception {
+    public Object log(InvocationContext context) throws Exception {
         Method m = context.getMethod();
-        logger.log(Logger.Level.INFO, "Entering: " + m);
-
-        context.proceed();
-        logger.log(Logger.Level.INFO, "Exiting: " + m);
-
+        logger.log(Level.INFO, "Entering: {0}", m);
+        Object result = context.proceed();
+        logger.log(Level.INFO, "Exiting: {0}", m);
+        return result;
     }
 }

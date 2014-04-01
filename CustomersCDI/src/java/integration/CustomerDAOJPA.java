@@ -14,6 +14,8 @@ import model.Customer;
  *
  * @author danecek
  */
+@DAOLogger
+@NewInterceptorBinding
 public class CustomerDAOJPA implements CustomerDAO {
 
     @PersistenceContext(name = "CustomersJPAPU")
@@ -31,8 +33,8 @@ public class CustomerDAOJPA implements CustomerDAO {
 
     @Override
     public Collection<Customer> findAll() {
-        TypedQuery<Customer> q =
-    (TypedQuery<Customer>) em.createQuery("SELECT customer FROM Customer customer");
+        TypedQuery<Customer> q
+                = (TypedQuery<Customer>) em.createQuery("SELECT customer FROM Customer customer");
         return q.getResultList();
 
     }

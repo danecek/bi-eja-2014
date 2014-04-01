@@ -9,6 +9,4 @@
     <alternatives>
         <class>integration.mock.CustomerDAOMock</class>
     </alternatives>
-
-    
 </beans>

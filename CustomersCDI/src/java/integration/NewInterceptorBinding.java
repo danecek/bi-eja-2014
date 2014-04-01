@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package integration;
 
 import static java.lang.annotation.ElementType.TYPE;
@@ -20,5 +16,5 @@ import javax.interceptor.InterceptorBinding;
 @InterceptorBinding
 @Retention(RUNTIME)
 @Target({METHOD, TYPE})
-public @interface CustomerDAOInterceptorBinding {
+public @interface NewInterceptorBinding {
 }

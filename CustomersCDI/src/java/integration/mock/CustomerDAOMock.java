@@ -6,7 +6,7 @@
 package integration.mock;
 
 import integration.CustomerDAO;
-//import integration.CustomerDAOQualifier;
+import integration.DAOLogger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.NavigableMap;
@@ -20,7 +20,7 @@ import model.Customer;
  * @author danecek
  */
 @Alternative
-//@CustomerDAOQualifier
+@DAOLogger
 public class CustomerDAOMock implements CustomerDAO {
 
     NavigableMap<Long, Customer> customers = new TreeMap<>();
