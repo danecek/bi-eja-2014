@@ -9,35 +9,28 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import model.Customer;
+import model.CustomerGroup;
 
 /**
  *
  * @author danecek
  */
 @Stateless
-public class CustomerDAO {
+public class GroupDAO {
 
     @PersistenceContext(name = "CustomersJPAPU")
     EntityManager em;
 
-    public void create(Customer customer) {
-        em.persist(customer);
+    public void create(CustomerGroup group) {
+        em.persist(group);
     }
 
-    public Customer find(Long id) {
-        return em.find(Customer.class, id);
+    public CustomerGroup find(Long groupId) {
+        return em.find(CustomerGroup.class, groupId);
     }
 
-    public Collection<Customer> findAll() {
-        TypedQuery<Customer> q =
-    (TypedQuery<Customer>) em.createQuery("SELECT customer FROM Customer customer");
+    public Collection<CustomerGroup> findAll() {
+        TypedQuery<CustomerGroup> q = (TypedQuery<CustomerGroup>) em.createNamedQuery("findAll");
         return q.getResultList();
-
-    }
-
-    public void delete(Long custId) {
-        Customer c = find(custId);
-        em.remove(c);
     }
 }

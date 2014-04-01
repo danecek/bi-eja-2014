@@ -7,25 +7,20 @@ package view;
 import business.CustomersFacade;
 import java.util.Collection;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import model.Customer;
 
-/**
- *
- * @author danecek
- */
-@ManagedBean
+@Named
 @RequestScoped
 public class IndexBean {
-    
+
     @EJB
     CustomersFacade customersFacade;
-    
-    
-    public Collection<Customer>getCustomers() {
-       return customersFacade.findAllCustomers();
-        
+
+    public Collection<Customer> getCustomers() {
+        return customersFacade.findAllCustomers();
+
     }
 
     /**

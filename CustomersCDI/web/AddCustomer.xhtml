@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./customerTemplate.xhtml">
+
+            <ui:define name="top">
+                <h1>Add Customer</h1>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+
+                    <h:panelGrid columns="3">
+                        <h:outputLabel for="name" value="Name:" />
+                        <h:inputText id="name" value="#{addCustomerBean.name}" required="true" validatorMessage="Too short name" requiredMessage="Empty name">
+                            <f:ajax event="keyup" render="namemessage" />                          
+                            <f:validateLength minimum="3" />
+                        </h:inputText>
+                        <h:message id ="namemessage" for="name" style="color: red"/>
+                        <h:outputLabel for="age" value="Age:" />
+                        <h:inputText id="age" value="#{addCustomerBean.age}" required="true" validatorMessage="Invalid age" requiredMessage="Empty age">
+                            <f:ajax event="keyup" render="agemessage" />                          
+                            <f:validateLongRange minimum="1" maximum="100"/>
+                        </h:inputText>
+                        <h:message id="agemessage" for="age" style="color: red"/>
+                        <h:outputLabel for="group" value="Group:" />
+                        <h:selectOneMenu id="group" value="#{addCustomerBean.groupId}">
+                            <f:selectItems value="#{customerDB.groups}" var="g" itemValue="#{g.id}" />
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:commandButton action="#{addCustomerBean.store}" value="Add Customer"   />
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
