@@ -5,7 +5,6 @@
 package integration;
 
 import java.util.Collection;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -15,7 +14,6 @@ import model.CustomerGroup;
  *
  * @author danecek
  */
-@Stateless
 public class GroupDAO {
 
     @PersistenceContext(name = "CustomersJPAPU")

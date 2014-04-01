@@ -24,7 +24,7 @@ public class CustomersFacade {
     @Inject
 //    @CustomerDAOQualifier
     CustomerDAO customerDAO;
-    @EJB
+    @Inject
     GroupDAO groupDAO;
 
     public void createCustomer(Customer customer) {

@@ -5,8 +5,10 @@
 package integration;
 
 import java.lang.reflect.Method;
+import javax.enterprise.context.Dependent;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
+
 import javax.interceptor.InvocationContext;
 import org.jboss.logging.Logger;
 
@@ -14,11 +16,12 @@ import org.jboss.logging.Logger;
  *
  * @author danecek
  */
-@CustomerDAOInterceptorBinding
 @Interceptor
+@Dependent
+@CustomerDAOInterceptorBinding
 public class LoggerInterceptor {
 
-    Logger logger = Logger.getLogger(LoggerInterceptor.class.getName());
+    private static final Logger logger = Logger.getLogger(LoggerInterceptor.class.getName());
 
     @AroundInvoke
     public void log(InvocationContext context) throws Exception {

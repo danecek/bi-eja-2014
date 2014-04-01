@@ -14,7 +14,6 @@ import model.Customer;
  *
  * @author danecek
  */
-@CustomerDAOInterceptorBinding
 public class CustomerDAOJPA implements CustomerDAO {
 
     @PersistenceContext(name = "CustomersJPAPU")

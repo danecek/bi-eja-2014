@@ -6,4 +6,9 @@
     <interceptors>
         <class>integration.LoggerInterceptor</class>
     </interceptors>
+    <alternatives>
+        <class>integration.mock.CustomerDAOMock</class>
+    </alternatives>
+
+    
 </beans>
