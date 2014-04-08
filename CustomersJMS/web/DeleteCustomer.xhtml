@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./customerTemplate.xhtml">
+
+            <ui:define name="top">
+                Delete Customer
+            </ui:define>
+
+
+            <ui:define name="content">
+                <h:panelGrid columns="2">
+                    <h:outputLabel for="custid" value="Id:" />
+                    <h:outputText id="custid" value="#{deleteCustomerBean.customer.id}"/>
+                    <h:outputLabel for="custname" value="Name:" />
+                    <h:outputText id="custname" value="#{deleteCustomerBean.customer.name}"/>
+                </h:panelGrid>
+                <h:form>
+                    <h:commandButton value="Delete Customer" action="#{deleteCustomerBean.delete}">
+                        <f:param name="custId" value="#{deleteCustomerBean.customer.id}"/>
+                    </h:commandButton>
+                    <h:commandButton action="index" value="Cancel" immediate="true"  />
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
