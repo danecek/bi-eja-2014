@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+
+        <div id="top" class="top">
+            User: #{loginBean.user()}
+            <hr/>
+            <ui:insert name="top">Top</ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+                    <h:link outcome="AddCustomer.xhtml">Add Customer</h:link><br/>
+                    <h:link outcome="AddGroup.xhtml">Add Group</h:link><br/>
+                    <c:if test="#{not loginBean.userLogged()}">
+                        <h:link outcome="Login.xhtml">Login</h:link><br/>
+                    </c:if>
+                    <c:if test="#{loginBean.userLogged()}">
+                        <h:form>
+                            <h:commandLink action="#{loginBean.logout()}">Logout</h:commandLink><br/>                          
+                        </h:form>
+                    </c:if>
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
+    </h:body>
+
+</html>
