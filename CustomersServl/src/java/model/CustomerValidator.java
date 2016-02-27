@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
-/**
- *
- * @author danecek
- */
 public class CustomerValidator {
 
     private String name ="";
@@ -66,14 +58,14 @@ public class CustomerValidator {
 
     public Customer validate() {
         if (name.isEmpty()) {
-            validationError = "Name is empty";
+            validationError = "Empty name";
             return null;
         }
         int a = 0;
         try {
             a = Integer.parseInt(age);
         } catch (NumberFormatException e) {
-            validationError = "Aage invalid";
+            validationError = "Invalid age";
             return null;
         }
         return new Customer(name, a);
