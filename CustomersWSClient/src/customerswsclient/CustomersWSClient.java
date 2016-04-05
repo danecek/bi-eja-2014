@@ -8,7 +8,6 @@ package customerswsclient;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import javax.activation.CommandMap;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
